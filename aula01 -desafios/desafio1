@@ -1,0 +1,67 @@
+1. Implementa a função `print_list`, que recebe o nó de início da lista e imprime todos os seus valores
+
+#include<stdio.h>
+#include <stdlib.h>
+
+struct no{
+int info; //recebe um numero inteiro
+struct no *prox;
+};
+
+//essa funçao apenas cria o no na memoria
+//coloca um valor dentro dele
+struct no *novoNo(int info){
+    struct no *novo = malloc(sizeof(struct no));
+
+    if(novo == NULL)
+    {
+        return NULL;
+    }
+    novo->info = info;
+    novo->prox = NULL;
+
+    return novo;
+}
+
+//Insere um novo nó no início da lista
+//Faz o novo nó apontar para o antigo início
+
+struct no *insert_first(struct no *Lista, int info){
+    struct no *novo = novoNo(info);
+
+    if( novo == NULL){
+        return Lista; // se nao tem nada, mantem a lista igual
+    }
+        novo->prox = Lista; // o novo no aponta para o antigo inicio que era o prox
+        return novo;
+    }
+    //funçao print_list, ele percorre a lista do inico ao final
+    // impreme o valor q e o (info) de cada no
+
+    void print_list(struct no *Lista){
+        struct no *curr = Lista; // o curr = atual e um ponteiro para auxiliar para percorrer a lista 
+
+        while(curr != NULL){
+            printf("%d",curr->info); // impime o valor do no curr = atual
+            curr = curr->prox; // o curr= atual aponta para o info q onde esta os numeros e percorre por ele ate for NULL
+        }
+        printf("\n");
+    }
+    
+
+    int main()
+    {
+        struct no *Lista = NULL; // aqui criamos a lista vazia 
+
+        //insere valores no inicio e cada nova inserçao vira o primeiro no
+        
+        Lista = insert_first(Lista, 10);
+         Lista = insert_first(Lista, 20);
+         Lista = insert_first(Lista, 30);
+
+        print_list(Lista);
+
+        return 0;
+
+    }    
+

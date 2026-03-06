@@ -1,0 +1,45 @@
+
+void print_list(struct no *Lista){
+    struct no *curr = Lista;
+
+    while(curr != NULL){
+        printf("%d", curr->info);
+        curr = curr->prox;
+    }
+    printf("\n");
+}
+
+struct no *reverse_list(struct no *lista)
+{
+    struct no *anterior = NULL;
+    struct no *atual = lista;
+    struct no *proximo = NULL;
+
+    while(atual != NULL)
+    {
+        proximo = atual->prox;   // guarda o próximo
+        atual->prox = anterior;  // inverte o ponteiro
+        anterior = atual;        // avança anterior
+        atual = proximo;         // avança atual
+    }
+
+    return anterior;
+}
+
+int main()
+{
+    
+        struct no *Lista = NULL; // aqui criamos a lista vazia 
+
+        //insere valores no inicio e cada nova inserçao vira o primeiro no
+        
+        Lista = insert_last(Lista, 10);
+         Lista = insert_last(Lista, 20);
+         Lista = insert_last(Lista, 30);
+//sem remoçao
+        print_list(Lista);
+
+        // com reverse
+Lista = reverse_list(Lista);
+print_list(Lista);
+    return 0;}

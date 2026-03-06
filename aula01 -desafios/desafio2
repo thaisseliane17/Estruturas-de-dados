@@ -1,0 +1,46 @@
+Tente criar uma função para remover o último elemento da lista. Faça testes na main e verifique se sua função funciona corretamente.
+Selection deleted
+
+//remove
+struct no *remove_last(struct no *Lista){
+
+    if(Lista == NULL){ // aqui ele verefica a lista se esta vazia 
+        return NULL; // lista vazia
+    }
+
+    if(Lista->prox == NULL){
+        free(Lista); // aqui ele fala q so tem um no 
+        return NULL;
+    }
+
+    struct no *curr = Lista;
+    while(curr ->prox->prox != NULL){
+        curr = curr->prox;
+    }
+
+    free(curr->prox); //libera o ultimo no
+    curr->prox = NULL; // penultimo vira o ultimo 
+
+    return Lista;
+}
+
+int main()
+{
+    
+        struct no *Lista = NULL; // aqui criamos a lista vazia 
+
+        //insere valores no inicio e cada nova inserçao vira o primeiro no
+        
+        Lista = insert_last(Lista, 10);
+         Lista = insert_last(Lista, 20);
+         Lista = insert_last(Lista, 30);
+//sem remoçao
+        print_list(Lista);
+
+        // com remoçao
+        Lista = remove_last(Lista);
+        printf("Depois da remoçao\n ");
+        print_list(Lista);
+        return 0;
+
+}

@@ -1,0 +1,44 @@
+//remove pelo valor
+
+struct no *remove_value(struct no *Lista, int value){
+    struct no *atual = Lista;
+    struct no *anterior = NULL;
+    
+//vereficaçao se o valor pedido e o primeiro no
+    while(atual != NULL){
+        if(atual->info == value){
+            if(anterior == NULL){
+                Lista = atual->prox;
+            }
+            else
+            {
+                anterior->prox = atual->prox;
+            }
+            free(atual);
+            return Lista;
+        }
+        anterior = atual;
+        atual = atual->prox;
+    }
+    return Lista;
+}
+
+
+int main()
+{
+    
+        struct no *Lista = NULL; // aqui criamos a lista vazia 
+
+        //insere valores no inicio e cada nova inserçao vira o primeiro no
+        
+        Lista = insert_last(Lista, 10);
+         Lista = insert_last(Lista, 20);
+         Lista = insert_last(Lista, 30);
+//sem remoçao
+        print_list(Lista);
+
+        // com remoçao
+        Lista = remove_value(Lista, 20);
+        printf("Depois da remoçao\n ");
+        print_list(Lista);
+        return 0;}
