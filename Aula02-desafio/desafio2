@@ -1,0 +1,106 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+
+typedef struct no {
+    int info;
+    struct no *prox;
+} No;
+
+typedef No* Celula;
+
+typedef struct lista {
+    Celula inicio;
+    Celula fim;
+} Lista;
+
+typedef Lista* ListaLigada;
+
+
+ListaLigada novaLista() {
+    ListaLigada l = (ListaLigada) malloc(sizeof(Lista));
+
+    if (l != NULL) {
+        l->inicio = NULL;
+        l->fim = NULL;
+    }
+
+    return l;
+}
+
+
+
+Celula novaCelula(int info) {
+    Celula c = (Celula) malloc(sizeof(No));
+
+    if (c != NULL) {
+        c->info = info;
+        c->prox = NULL;
+    }
+
+    return c;
+}
+
+
+//INSERIR NO FINAL
+void inserirFinal(ListaLigada lista, int valor) {
+    if (lista == NULL) return;
+
+    Celula nova = novaCelula(valor);
+
+    if (nova != NULL) {
+        if (lista->inicio == NULL) {
+            lista->inicio = nova;
+            lista->fim = nova;
+        } else {
+            lista->fim->prox = nova;
+            lista->fim = nova;
+        }
+    }
+}
+
+
+
+void imprimirLista(ListaLigada lista) {
+    if (lista == NULL) return;
+
+    Celula atual = lista->inicio;
+
+    while (atual != NULL) {
+        printf("%d -> ", atual->info);
+        atual = atual->prox;
+    }
+    printf("NULL\n");
+}
+
+
+//  BUBBLE SORT 
+
+void bubbleSort(ListaLigada lista){
+    if (lista == NULL || lista->inicio == NULL){
+        return;
+    }
+
+    int trocou;
+    Celula atual;
+    Celula limite = NULL;
+
+    do{
+        trocou = 0;
+        atual = lista->inicio;
+
+        while(atual->prox != limite){
+            if (atual->info > atual->prox->info){
+                int temp = atual->info;
+                atual->info = atual->prox->info;
+                atual->prox->info = temp;
+                trocou = 1;
+            }
+            atual = atual->prox;
+        }
+        limite = atual;
+
+    }while(trocou);
+}
+
+

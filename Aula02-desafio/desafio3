@@ -1,0 +1,58 @@
+void insereOrdenado(ListaLigada lista, int valor){
+    if (lista == NULL) return;
+
+    Celula novo = novaCelula(valor);
+    if (novo == NULL) return;
+
+    // lista vazia e vereficando
+    if (lista->inicio == NULL){
+        lista->inicio = novo;
+        lista->fim = novo;
+        return;
+    }
+
+    Celula atual = lista->inicio;
+    Celula anterior = NULL;
+
+    // encontrar posição correta para inserir o valor
+    while(atual != NULL && atual->info < valor){
+        anterior = atual;
+        atual = atual->prox;
+    }
+
+    if (anterior == NULL){
+        novo->prox = lista->inicio;
+        lista->inicio = novo;
+    }
+    else{
+        anterior->prox = novo;
+        novo->prox = atual;
+    }
+
+    // atualizar fim da lista
+    if (novo->prox == NULL){
+        lista->fim = novo;
+    }
+}
+
+
+
+// MAIN 
+
+int main() {
+    ListaLigada lista = novaLista();
+
+    if (lista != NULL){
+
+        insereOrdenado(lista, 10);
+        insereOrdenado(lista, 8;
+        insereOrdenado(lista, 8);
+        insereOrdenado(lista, 2);
+        insereOrdenado(lista, 3);
+
+        printf("Lista ordenada:\n");
+        imprimirLista(lista);
+    }
+
+    return 0;
+}

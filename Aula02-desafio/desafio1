@@ -1,0 +1,14 @@
+int somaLista(ListaLigada lista){
+    if (lista == NULL || lista -> inicio == NULL){
+        return 0;
+    }
+
+    Celula atual = lista->inicio;
+    int soma = 0;
+
+    while(atual != NULL){
+        soma += atual->info;
+        atual = atual ->prox;
+    }
+    return soma;
+}
